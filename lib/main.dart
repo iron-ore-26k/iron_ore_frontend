@@ -34,6 +34,25 @@ class MyApp extends StatelessWidget {
     }
     return MaterialApp(
       theme: ThemeData(primarySwatch: colourField),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: colourField,
+        primaryColorDark: colourField,
+        secondaryHeaderColor: colourField,
+        toggleableActiveColor: colourField,
+        cardColor: colourField,
+        bottomAppBarColor: colourField,
+        dialogBackgroundColor: colourField,
+        indicatorColor: colourField,
+        dividerColor: colourField.withOpacity(0.12),
+        applyElevationOverlayColor: true,
+        floatingActionButtonTheme:
+            FloatingActionButtonThemeData(backgroundColor: colourField),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(colourField))),
+      ),
       initialRoute: '/',
       routes: {
         '/': ((context) => MyHomePage()),
