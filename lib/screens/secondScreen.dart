@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:iron_ore_frontend/providers/serveripProvider.dart';
+import 'package:iron_ore_frontend/providers/mainStateProvider.dart';
 
 class SecondPage extends StatelessWidget {
   SecondPage({super.key});
@@ -14,7 +14,7 @@ class SecondPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              "Current address: ${context.watch<ServerIp>().server_address}",
+              "Current address: ${context.watch<MainState>().server_address}",
             ),
             FormWidget(),
           ],
@@ -44,17 +44,18 @@ class _FormWidget extends State<FormWidget> {
           TextFormField(
             decoration: const InputDecoration(
               hintText: 'Enter the desired server address',
+              contentPadding: EdgeInsets.symmetric(horizontal: 40.0),
             ),
             validator: (String? value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter some text';
               }
-              context.read<ServerIp>().setAddress(value);
+              context.read<MainState>().setAddress(value);
               return null;
             },
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 40),
             child: ElevatedButton(
               onPressed: () {
                 // Validate will return true if the form is valid, or false if
