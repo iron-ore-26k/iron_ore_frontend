@@ -37,7 +37,7 @@ class MainState with ChangeNotifier {
         _cover_url =
             "https://upload.wikimedia.org/wikipedia/en/c/c5/Album_Summertime_Dream.jpg";
         getImagePalette(NetworkImage(_cover_url))
-            .then((data) => {_accentColour = data!});
+            .then((data) => {setAccentCol(data!)});
         break;
       case "Fortunate Son":
         backend.songChoice = Song.SONG_FORTUNATE_SON;
@@ -45,7 +45,7 @@ class MainState with ChangeNotifier {
         _cover_url =
             "https://upload.wikimedia.org/wikipedia/en/8/85/Willy_and_the_poor_boys.jpg";
         getImagePalette(NetworkImage(_cover_url))
-            .then((data) => {_accentColour = data!});
+            .then((data) => {setAccentCol(data!)});
         break;
     }
     notifyListeners();
@@ -55,6 +55,12 @@ class MainState with ChangeNotifier {
   void setAddress(String newAdress) {
     _server_address = newAdress;
     backend._updateServer(newAdress);
+    notifyListeners();
+  }
+
+  // Update target backend address at runtime
+  void setAccentCol(Color newColour) {
+    _accentColour = newColour;
     notifyListeners();
   }
 

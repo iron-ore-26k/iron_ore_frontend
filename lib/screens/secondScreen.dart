@@ -7,7 +7,10 @@ class SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Enter IP address')),
+      appBar: AppBar(
+        title: Text('Enter IP address'),
+        backgroundColor: context.watch<MainState>().accentColour,
+      ),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,

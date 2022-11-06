@@ -11,7 +11,10 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Iron-Ore')),
+      appBar: AppBar(
+        title: Text('Iron-Ore'),
+        backgroundColor: context.watch<MainState>().accentColour,
+      ),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
