@@ -8,6 +8,8 @@ import 'package:palette_generator/palette_generator.dart';
 
 import 'dart:developer';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class MainState with ChangeNotifier {
   _serv backend = _serv();
 
@@ -26,6 +28,22 @@ class MainState with ChangeNotifier {
 
   int _selected_song_idx = 1;
   int get selected_song_idx => _selected_song_idx;
+
+  late final prefs; // For local storage of server url
+
+  MainState() {
+    // Constructor
+    initSharedPref();
+  }
+
+  void initSharedPref() async {
+    await SharedPreferences.getInstance().then((value) {
+      prefs = value; // Assign sharedPref obj
+      _server_address =
+          prefs.getString('server_address')!; // Check for server_add
+      notifyListeners(); // Update text
+    });
+  } // Set shared pref instance
 
   // Update song for display and song index
   void setSelectedSong(String newSongSelection) {
@@ -52,10 +70,11 @@ class MainState with ChangeNotifier {
   }
 
   // Update target backend address at runtime
-  void setAddress(String newAdress) {
+  void setAddress(String newAdress) async {
     _server_address = newAdress;
     backend._updateServer(newAdress);
     notifyListeners();
+    await prefs.setString('server_address', newAdress); // Set server
   }
 
   // Update target backend address at runtime

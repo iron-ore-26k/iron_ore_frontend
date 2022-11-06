@@ -45,6 +45,7 @@ dependencies:
   provider: ^5.0.0
   blur: ^3.1.0
   palette_generator: any
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:
