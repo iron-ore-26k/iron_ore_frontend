@@ -19,22 +19,22 @@ class _DropDwnButtState extends State<DropDwnButt> {
 
   @override
   Widget build(BuildContext context) {
-    var colourField = Colors.amber;
-    switch (context.watch<MainState>().selected_song_idx) {
-      case 1:
-        colourField = Colors.blue;
-        break;
-      case 2:
-        colourField = Colors.red;
-        break;
-    }
+    // var colourField = Colors.amber;
+    // switch (context.watch<MainState>().selected_song_idx) {
+    //   case 1:
+    //     colourField = Colors.blue;
+    //     break;
+    //   case 2:
+    //     colourField = Colors.red;
+    //     break;
+    // }
     return DropdownButton<String>(
       value: dropdownValue,
       icon: const Icon(Icons.arrow_downward),
       elevation: 16,
       underline: Container(
         height: 2,
-        color: colourField,
+        color: context.watch<MainState>().accentColour,
       ),
       onChanged: (String? value) {
         // This is called when the user selects an item.

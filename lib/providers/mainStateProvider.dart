@@ -4,11 +4,19 @@ import 'package:iron_ore_frontend/gen/protobuf/ore/service.pbgrpc.dart';
 import 'package:iron_ore_frontend/gen/protobuf/ore/songs.pb.dart';
 import 'package:iron_ore_frontend/screens/homeScreen.dart';
 import 'package:protobuf/protobuf.dart';
+import 'package:palette_generator/palette_generator.dart';
 
 import 'dart:developer';
 
 class MainState with ChangeNotifier {
   _serv backend = _serv();
+
+  String _cover_url =
+      "https://upload.wikimedia.org/wikipedia/en/c/c5/Album_Summertime_Dream.jpg";
+  String get cover_url => _cover_url;
+
+  Color _accentColour = Colors.black;
+  Color get accentColour => _accentColour;
 
   String _server_address = "localhost"; // Default
   String get server_address => _server_address;
@@ -26,12 +34,18 @@ class MainState with ChangeNotifier {
       case "The Wreck of the Edmund Fitzgerald":
         backend.songChoice = Song.SONG_WRECK_OF_EDMUND_FITZGERALD;
         _selected_song_idx = 1;
-        log("Wreck");
+        _cover_url =
+            "https://upload.wikimedia.org/wikipedia/en/c/c5/Album_Summertime_Dream.jpg";
+        getImagePalette(NetworkImage(_cover_url))
+            .then((data) => {_accentColour = data!});
         break;
       case "Fortunate Son":
         backend.songChoice = Song.SONG_FORTUNATE_SON;
         _selected_song_idx = 2;
-        log("FS");
+        _cover_url =
+            "https://upload.wikimedia.org/wikipedia/en/8/85/Willy_and_the_poor_boys.jpg";
+        getImagePalette(NetworkImage(_cover_url))
+            .then((data) => {_accentColour = data!});
         break;
     }
     notifyListeners();
@@ -53,6 +67,13 @@ class MainState with ChangeNotifier {
     backend._sendGrpcPlay();
     notifyListeners();
   }
+}
+
+/*    Provides a future which resolves into a pallete according to an image */
+Future<Color?> getImagePalette(ImageProvider imageProvider) async {
+  final PaletteGenerator paletteGenerator =
+      await PaletteGenerator.fromImageProvider(imageProvider);
+  return paletteGenerator.dominantColor?.color;
 }
 
 class _serv {

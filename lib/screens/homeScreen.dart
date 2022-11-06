@@ -1,7 +1,10 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:iron_ore_frontend/providers/mainStateProvider.dart';
 import 'package:iron_ore_frontend/additional_widgets/dropdown_button.dart';
+import 'package:blur/blur.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
@@ -9,12 +12,23 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Iron-Ore')),
-      body: Center(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(context.watch<MainState>().cover_url),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Column(
           // mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 15.0, sigmaY: 15.0),
+                child: Container(
+                    decoration:
+                        BoxDecoration(color: Colors.white.withOpacity(0.0)))),
             DropDwnButt(),
             SizedBox(
                 height: MediaQuery.of(context).size.height /

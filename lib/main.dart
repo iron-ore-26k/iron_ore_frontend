@@ -23,35 +23,53 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    var colourField = Colors.amber;
-    switch (context.watch<MainState>().selected_song_idx) {
-      case 1:
-        colourField = Colors.blue;
-        break;
-      case 2:
-        colourField = Colors.red;
-        break;
-    }
+    // var colourField = Colors.amber;
+    // switch (context.watch<MainState>().selected_song_idx) {
+    //   case 1:
+    //     colourField = Colors.blue;
+    //     break;
+    //   case 2:
+    //     colourField = Colors.red;
+    //     break;
+    // }
     return MaterialApp(
-      theme: ThemeData(primarySwatch: colourField),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: colourField,
-        primaryColorDark: colourField,
-        secondaryHeaderColor: colourField,
-        toggleableActiveColor: colourField,
-        cardColor: colourField,
-        bottomAppBarColor: colourField,
-        dialogBackgroundColor: colourField,
-        indicatorColor: colourField,
-        dividerColor: colourField.withOpacity(0.12),
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primaryColor: context.watch<MainState>().accentColour,
+        primaryColorDark: context.watch<MainState>().accentColour,
+        secondaryHeaderColor: context.watch<MainState>().accentColour,
+        toggleableActiveColor: context.watch<MainState>().accentColour,
+        cardColor: context.watch<MainState>().accentColour,
+        bottomAppBarColor: context.watch<MainState>().accentColour,
+        dialogBackgroundColor: context.watch<MainState>().accentColour,
+        indicatorColor: context.watch<MainState>().accentColour,
+        dividerColor: context.watch<MainState>().accentColour.withOpacity(0.12),
         applyElevationOverlayColor: true,
-        floatingActionButtonTheme:
-            FloatingActionButtonThemeData(backgroundColor: colourField),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+            backgroundColor: context.watch<MainState>().accentColour),
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(colourField))),
+                backgroundColor: MaterialStateProperty.all<Color>(
+                    context.watch<MainState>().accentColour))),
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: context.watch<MainState>().accentColour,
+        primaryColorDark: context.watch<MainState>().accentColour,
+        secondaryHeaderColor: context.watch<MainState>().accentColour,
+        toggleableActiveColor: context.watch<MainState>().accentColour,
+        cardColor: context.watch<MainState>().accentColour,
+        bottomAppBarColor: context.watch<MainState>().accentColour,
+        dialogBackgroundColor: context.watch<MainState>().accentColour,
+        indicatorColor: context.watch<MainState>().accentColour,
+        dividerColor: context.watch<MainState>().accentColour.withOpacity(0.12),
+        applyElevationOverlayColor: true,
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+            backgroundColor: context.watch<MainState>().accentColour),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                    context.watch<MainState>().accentColour))),
       ),
       initialRoute: '/',
       routes: {
